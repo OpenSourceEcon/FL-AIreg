@@ -110,7 +110,7 @@ def main():
     for the top earners down to 0.1% for the bottom earners
     ---------------------------------------------------------------------------
     """
-    client = Client(n_workers=num_workers, threads_per_worker=1)
+    # client = Client(n_workers=num_workers, threads_per_worker=1)
     # Set up baseline parameterization
     p2 = Specifications(
         baseline=False,
@@ -142,7 +142,7 @@ def main():
 
     # Update the e matrix. Reduce the top productivity by 1%
     e_new = np.array(p2.e)
-    pct_chg_vec = 1 - np.linspace(0.01, 0.10, 10)
+    pct_chg_vec = 1 - np.linspace(0.001, 0.010, e_new.shape[1])
     for col in range(e_new.shape[1]):
         e_new[:, col] = e_new[:, col] * pct_chg_vec[col]
     p2.e = e_new
